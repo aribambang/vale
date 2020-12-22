@@ -6,16 +6,27 @@
       <router-link to="/register">Register as Teacher</router-link>
     </div>
     <ul v-if="hasTeachers">
-      <li v-for="teacher in filteredTeachers" :key="teacher.id">
-        {{ teacher.firstName + ' ' + teacher.lastName }}
-      </li>
+      <teacher-item
+        v-for="teacher in filteredTeachers"
+        :key="teacher.id"
+        :id="teacher.id"
+        :first-name="teacher.firstName"
+        :last-name="teacher.lastName"
+        :rate="teacher.hourlyRate"
+        :areas="teacher.areas"
+      ></teacher-item>
     </ul>
     <h3 v-else>No teachers found.</h3>
   </section>
 </template>
 
 <script>
+import TeacherItem from '../../components/teachers/TeacherItem';
+
 export default {
+  components: {
+    TeacherItem,
+  },
   computed: {
     filteredTeachers() {
       return this.$store.getters['teachers/teachers'];
@@ -26,3 +37,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
