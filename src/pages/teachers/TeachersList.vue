@@ -1,5 +1,7 @@
 <template>
-  <section>Filter</section>
+  <section>
+    <teacher-filter @change-filter="setFilters"></teacher-filter>
+  </section>
   <section>
     <base-card>
       <div class="controls">
@@ -24,17 +26,45 @@
 
 <script>
 import TeacherItem from '../../components/teachers/TeacherItem';
+import TeacherFilter from '../../components/teachers/TeacherFilter';
 
 export default {
+  data() {
+    return {
+      activeFilters: {
+        frontend: true,
+        backend: true,
+        career: true,
+      },
+    };
+  },
   components: {
     TeacherItem,
+    TeacherFilter,
   },
   computed: {
     filteredTeachers() {
-      return this.$store.getters['teachers/teachers'];
+      const teachers = this.$store.getters['teachers/teachers'];
+      return teachers.filter((teacher) => {
+        if (this.activeFilters.frontend && teacher.areas.includes('frontend')) {
+          return true;
+        }
+        if (this.activeFilters.backend && teacher.areas.includes('backend')) {
+          return true;
+        }
+        if (this.activeFilters.career && teacher.areas.includes('career')) {
+          return true;
+        }
+        return false;
+      });
     },
     hasTeachers() {
       return this.$store.getters['teachers/hasTeachers'];
+    },
+  },
+  methods: {
+    setFilters(updatedFilters) {
+      this.activeFilters = updatedFilters;
     },
   },
 };
