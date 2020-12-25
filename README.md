@@ -1,6 +1,6 @@
 # vale
 
-Find a Teacher app written in [Vue](https://vuejs.org/)
+Find a Teacher app written in [Vue.js](https://vuejs.org/)
 
 > Nothing can't stop from soaring to the skies. ~ Vale
 
