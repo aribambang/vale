@@ -1,9 +1,19 @@
 <template>
-  Register
+  <section>
+    <base-card>
+      <h2>Registration as a coach now!</h2>
+      <teacher-form></teacher-form>
+    </base-card>
+  </section>
 </template>
 
 <script>
-export default {};
+import TeacherForm from '../../components/teachers/TeacherForm.vue';
+export default {
+  components: {
+    TeacherForm,
+  },
+};
 </script>
 
 <style></style>
